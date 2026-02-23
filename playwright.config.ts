@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
+import { DEFAULT_TIMEOUT } from './utils/timeout';
 
 /**
  * Read environment variables from file.
@@ -32,10 +33,10 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    testIdAttribute: 'data-e2e',
+    testIdAttribute: 'data-test',
     serviceWorkers: 'allow',
     acceptDownloads: true,
-
+    screenshot: 'only-on-failure',
     video: (() => {
       const videoModes = {
         off: 'off',
@@ -48,7 +49,7 @@ export default defineConfig({
     })()
   },
 
-  
+ timeout: DEFAULT_TIMEOUT,
 
   /* Configure projects for major browsers */
   projects: [
